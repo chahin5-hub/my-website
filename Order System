@@ -1,0 +1,11 @@
+const Order = mongoose.model("Order", {
+  userId: String,
+  serviceId: String,
+  status: String,
+});
+
+app.post("/api/order", async (req, res) => {
+  const order = new Order(req.body);
+  await order.save();
+  res.send(order);
+});
