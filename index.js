@@ -1,56 +1,70 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>موقعي</title>
 
-const app = express();
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+}
 
-app.use(cors());
-app.use(express.json());
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  background: #020617;
+  padding: 15px;
+}
 
-// اتصال بقاعدة البيانات
-mongoose.connect("mongodb://127.0.0.1:27017/prosite", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+nav a {
+  color: white;
+  text-decoration: none;
+}
 
-// موديل المستخدم
-const User = mongoose.model("User", {
-  username: String,
-  email: String,
-  password: String,
-});
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
 
-// تسجيل
-app.post("/api/register", async (req, res) => {
-  const user = new User(req.body);
-  await user.save();
-  res.send(user);
-});
+.hero h1 span {
+  color: #38bdf8;
+}
 
-// تسجيل دخول (بسيط)
-app.post("/api/login", async (req, res) => {
-  const user = await User.findOne(req.body);
-  res.send(user);
-});
+.btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 10px;
+  display: inline-block;
+}
 
-// موديل خدمة
-const Service = mongoose.model("Service", {
-  title: String,
-  price: Number,
-  description: String,
-});
+.btn1 { background: #38bdf8; color: black; }
+.btn2 { border: 1px solid #38bdf8; color: #38bdf8; }
 
-// إضافة خدمة
-app.post("/api/services", async (req, res) => {
-  const service = new Service(req.body);
-  await service.save();
-  res.send(service);
-});
+</style>
+</head>
 
-// عرض الخدمات
-app.get("/api/services", async (req, res) => {
-  const services = await Service.find();
-  res.send(services);
-});
+<body>
 
-app.listen(5000, () => console.log("Server running"));
+<nav>
+  <a href="#">الرئيسية</a>
+  <a href="portfolio.html">أعمالي</a>
+  <a href="#">تواصل</a>
+</nav>
+
+<div class="hero">
+  <h1>أنا <span>مطور مواقع</span></h1>
+  <p>أبني مواقع احترافية ومتاجر إلكترونية</p>
+
+  <a class="btn btn1" href="#">تواصل معي</a>
+  <a class="btn btn2" href="portfolio.html">أعمالي</a>
+</div>
+
+</body>
+</html>
